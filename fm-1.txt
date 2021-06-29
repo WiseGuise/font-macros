@@ -1,0 +1,26 @@
+Sub JumbleLetters2()
+   Dim oDoc As Object
+   Dim oText As Object
+   Dim oCursor As Object
+   Dim MoreText As Boolean
+   Dim nList As Long, nSize As Long
+   Dim FontList, FontSize
+
+   oDoc = ThisComponent
+   oText = oDoc.Text
+   FontList = Array("Arial","Times New Roman","DejaVu Sans","Century Gothic")
+   FontSize = Array(12,13,13.5,14,16.2,17)
+   nList = UBound(FontList)
+   nSize = UBound(FontSize)
+   MoreText = True
+   oCursor = oText.createTextCursor()
+   oCursor.gotoStart(False)
+   MoreText = oCursor.goRight(1,True)
+   do while MoreText
+      oCursor.CharHeight = FontSize(Int(Rnd()* nSize))
+      oCursor.CharFontName = FontList(Int(Rnd()* nList))
+      oCursor.collapseToEnd()
+      MoreText = oCursor.goRight(1,True)
+   loop
+
+End Sub

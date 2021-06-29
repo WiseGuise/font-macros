@@ -1,0 +1,36 @@
+//Create instance of Word application
+Set objWord = CreateObject("Word.Application")
+objWord.Visible = True
+
+//Open an existing Word document, Make sure the file is exist in this path- otherwise the program fails.
+Set objDoc = objWord.Documents.Open("C:\Scripts\Test.doc")
+
+//Create instance of random object
+Set objRandom = CreateObject("System.Random")
+
+intLow = 1
+intHigh = 5
+
+//Get the text of word document
+Set objRange = objDoc.Range()
+//Get the charcters of the text
+Set colCharacters = objRange.Characters
+
+ //Set different styles randomly 
+For Each strCharacter in colCharacters
+    intRandom = objRandom.Next_2(intLow,intHigh)
+
+Select Case intRandom
+    Case 1 strCharacter.Font.Name = "Arial"
+    Case 2 strCharacter.Font.Name = "Times New Roman"
+    Case 3 strCharacter.Font.Name = "Courier New"
+    Case 4 strCharacter.Font.Name = "Forte"
+End Select
+
+You should add to the program the following references:
+
+Microsoft.Office.Interop.Word
+
+Microsoft Office Object Library
+
+You can do it by right ckick on project -> Add reference, from the GAC tab select the first reference I mentioned above, from the COM tab select the second one.
